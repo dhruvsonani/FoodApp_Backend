@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
+require('dotenv').config()
 const foodRoutes = require('./routes/Food');
 
 const app = express();
@@ -29,7 +30,7 @@ app.get('/*',(req,res,next) => {
     res.json({error: '404 Not found! Sure you got the right address?'});
 })
 
-mongoose.connect('mongodb+srv://dhruvsonani1008:mviekcVnCt33phSL@cluster0.uc0nhal.mongodb.net/Zwiggy_Meals?retryWrites=true&w=majority').then(
+mongoose.connect(`${process.env.MONGODB_URL}`).then(
     app.listen(5000, () => {
         console.log('Database and server connected');
     })
